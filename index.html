@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Organization">
+<head>
+    <meta charset="utf-8"> 
+    <title>Flip.io</title>
+    <meta name="description" content="Flip.io - 999 word puzzles">
+    <meta name="author" content="Russell Beattie">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Flip.io" />
+    <meta property="og:description" content="999 word puzzles"/>  
+    <meta property="og:url" content="http://flip.io" />
+    <meta property="og:image" content="http://flip.io/media/flipscreenshot.png" />
+    <meta itemprop="name" content="Flip.io">
+    <meta itemprop="description" content="999 word puzzles">
+    <meta itemprop="image" content="http://flip.io/media/flipscreenshot.png">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0"> 
+    <meta name="apple-mobile-web-app-capable" content="yes">  
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+    <link rel="stylesheet" href="./lib/normalize.css">
+    <link rel="stylesheet" href="./main.css"> 
+</head> 
+ 
+<body>
+
+<div class="main">
+  <div class="topnav">
+    <h1 class="title"></h1>
+    <h1 class="titlenum"></h1>
+  </div>
+  <div class="content">
+  </div>
+  <div class="footer">
+  Developed by <a href="http://www.russellbeattie.com">Russell Beattie</a>
+  </div>
+</div>
+
+<script type="text/template" class="homeTemplate">
+
+    <h3>
+    999 word puzzles.
+    </h3>
+    <div class="puzhome">
+      <form class="puz-form">
+        Enter a Number: <br>
+        <input pattern="[0-9]*" name="puznum" class="puznum" value="<%=App.puzzleView.puzNum ? App.puzzleView.puzNum : ''%>">
+        <button class="go-btn btn">Go</button> <button class="random-btn btn">Random</button>
+      </form>
+
+        
+    </div>
+<%
+      var wins = App.getWins();
+
+      if(wins.length > 0){
+%>
+    <div class="wins">
+    Wins: 
+<%
+      for(var i = 0; i < wins.length; i++){
+        var win = wins[i];
+%>
+      <a href="#<%=win%>">#<%=win%></a> 
+<%
+      }
+%>
+  </div>
+<%
+}
+%>
+
+</script>
+
+<script type="text/template" class="puzzleTemplate">
+<%
+  var puzzle = obj;
+%>
+
+    <div class="answer">
+      <span class="answertext"></span>
+      <span class="reset">X</span>
+    </div>
+
+    <div class="clues">
+      <ul>
+<%
+    var clues = puzzle['clues'];
+
+    for(var i = 0; i < clues.length; i++){
+        var clue = clues[i]
+%>
+      <li data-answer="<%=clue['word']%>">
+      <span class="word"><%=clue['word'].length%> letters</span>: 
+      <span class="def"><%=clue['def']%></span>
+      </li>
+<%
+  }
+%>
+      </ul>
+    </div>
+
+    <div class="nav">
+      <span class="gohome">Home</span>
+      <span class="restart">Restart</span>
+      <span class="hint">Hint</span>
+      <span class="shuffle">Shuffle</span>
+    </div>
+
+    <div class="squares">
+      <table>
+      <tr>
+<%
+      var squares = puzzle['squares'];
+
+      for(var i = 0; i < squares.length; i++){
+          var sq = squares[i]
+
+          if(i % 4 == 0){
+%>
+      <tr>
+<%
+          }
+%>      
+      <td>
+          <div class="square letters"><%=sq%></div>
+        </td>
+<%
+      }
+%>
+      </table>
+    </div>
+
+    <div class="timer">00:00<div>
+
+</script>
+
+<script type="text/template" class="winTemplate">
+  
+  <h1>Great Job!</h1>
+  <h3>Your time: <%=formatTime(App.puzzleView.secs)%></h3>
+  <div class="nav">
+    <span class="next">Next Puzzle!</span>
+    <div class="share">
+<%
+    var params = {
+      url: document.location.href,
+      text: 'I solved this Flip.io puzzle in ' + formatTime(App.puzzleView.secs) + ' minutes! ' + document.location.href
+    }
+
+    paramString = $.param(params);
+
+%> 
+    <span><a class="share" target="_blank" href="https://twitter.com/share?url=<%=paramString%>"><i></i> Share on Twitter</a></span>
+
+    </div>
+  </div>
+
+</script>
+<script src="./lib/jquery.min.js"></script>
+<script src="./lib/lodash.min.js"></script> 
+<script src="./lib/backbone.min.js"></script> 
+<script src="./puzzles.js"></script>
+<script src="./app.js"></script>
+<script>
+$(function () {
+  App.init();
+});
+</script>
+</body>
+</html>
