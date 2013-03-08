@@ -11,6 +11,7 @@ Here's a quick rundown of the files:
 * main.css - style for GUI
 * LICENSE - MIT license for project
 * puzzles.js - generated JSON list of puzzles using batch
+* words.txt - dictionary list of 23,570 words used to generate puzzle.js
 * fonts/ - offline cache of web fonts used in various formats (included for convenience)
 * lib/ - directory containing third party libraries (included for convenience): backbone, lodash, jquery, normalize.css
 * media/ - folder for sound files and images
