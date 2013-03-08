@@ -1,4 +1,4 @@
-# [Flip.io Puzzle](http://flip.io)
+# [Flip.io Puzzle Game](http://flip.io)
 
 An HTML5 puzzle app, and puzzle file generator. MIT licensed. Code is running at http://flip.io
 
