@@ -24,11 +24,21 @@ squaresList[4] = [
     {wordlen: 9, squares: [2,2,2,3] },
     {wordlen: 9, squares: [2,2,3,2] },
     {wordlen: 9, squares: [2,3,2,2] },
-    {wordlen: 9, squares: [3,2,2,2] }
+    {wordlen: 9, squares: [3,2,2,2] },
+    {wordlen: 10, squares: [3,3,2,2]},
+    {wordlen: 10, squares: [3,2,3,2]},
+    {wordlen: 10, squares: [3,2,2,3]},
+    {wordlen: 10, squares: [2,2,3,3]},
+    {wordlen: 10, squares: [2,3,2,3]}
 ];
 
-// To fill 20 squares with letters 7 words
-var squaresNeeded = [4, 3, 3, 3, 3, 2, 2];
+// To fill 30 squares with
+var squaresWordLengths = [
+    [4, 4, 3, 3, 3, 3, 3, 3, 2, 2],
+    [4, 4, 4, 3, 3, 3, 3, 2, 2, 2]
+];
+
+
 
 
 // pull in the word list, divide into lists by word length
@@ -52,16 +62,16 @@ for (var i = 0; i < lines.length; i++) {
     }
 }
 
-
 // generate puzzles
 var puzzles = [];
 
 for(var p = 1; p <= 1000; p++){
 
-
     var puzzle = {};
     var cwords = [];
     var csquares = [];
+
+    var squaresNeeded = squaresWordLengths[Math.floor(Math.random() * squaresWordLengths.length)];
 
     for (var i = 0; i < squaresNeeded.length; i++) {
 
@@ -107,7 +117,7 @@ var json = JSON.stringify(puzzles);
 
 var js = 'var puzzles = ' + json;
 
-fs.writeFileSync('./puzzles_test.js', js);
+fs.writeFileSync('../puzzles.js', js);
 
 
 

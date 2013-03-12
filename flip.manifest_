@@ -7,6 +7,12 @@ lib/jquery.min.js
 lib/lodash.min.js
 lib/normalize.css
 main.css
+fonts/oxygen400.eot
+fonts/oxygen400.ttf
+fonts/oxygen400.woff
+fonts/oxygen700.eot
+fonts/oxygen700.ttf
+fonts/oxygen700.woff
 media/ding.mp3
 media/ding.wav
 media/flipscreenshot.png
