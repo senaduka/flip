@@ -566,17 +566,24 @@ App.PuzzleView = Backbone.View.extend({
 
 // ----- misc functions
 
-function formatTime(sec){
+function formatTime(seconds){
 
-	var hr = Math.floor(sec / 3600);
-	var min = Math.floor((sec - (hr * 3600))/60);
-	sec -= ((hr * 3600) + (min * 60));
-	sec += ''; min += '';
-	while (min.length < 2) {min = '0' + min;}
-	while (sec.length < 2) {sec = '0' + sec;}
-	hr = (hr)?':'+hr:'';
+    var hours = Math.floor(seconds / 3600);
+    seconds -= hours * 3600;
+    var minutes = Math.floor(seconds / 60);
+    seconds -= minutes * 60;
 
-    return hr + min + ':' + sec;
+    if (hours   < 10) {hours   = '0' + hours;}
+    if (minutes < 10) {minutes = '0' + minutes;}
+    if (seconds < 10) {seconds = '0' + seconds;}
+
+    if(hours == '00'){
+        hours = '';
+    } else {
+        hours = hours + ':';
+    }
+
+    return hours + minutes + ':' + seconds;
 
 }
 
