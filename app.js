@@ -265,6 +265,7 @@ App.PuzzleView = Backbone.View.extend({
         if(App.touch){
             events = {
                 'touchend .shuffle' : 'doShuffle',
+                'touchend .sort' : 'doSort',
                 'touchend .hint' : 'doHint',
                 'touchend .square' : 'doSquare',
                 'touchend .reset': 'doReset',
@@ -275,6 +276,7 @@ App.PuzzleView = Backbone.View.extend({
         } else {
             events = {
                 'click .shuffle' : 'doShuffle',
+                'click .sort' : 'doSort',
                 'click .hint' : 'doHint',
                 'click .square' : 'doSquare',
                 'click .reset': 'doReset',
@@ -328,8 +330,46 @@ App.PuzzleView = Backbone.View.extend({
     },
 
     doShuffle: function(e){
-        shuffleItems('tr');
-        shuffleItems('tbody');
+        App.puzzleView.redrawSquares('shuffle');
+    },
+
+    doSort: function(e){
+        App.puzzleView.redrawSquares('sort');
+    },
+
+    redrawSquares: function(order){
+
+        App.puzzleView.doReset();
+
+        var squares = puzzles[App.puzzleView.puzNum]['squares'];
+
+        if(order == 'sort'){
+            squares.sort();
+        } else {
+            squares = shuffle(squares);
+        }
+
+        var hidden = [];
+        $('.square:hidden').each(function(){
+            hidden.push($(this).text());
+        });
+        hidden.sort();
+
+        for(var i = 0; i < $('.square').length; i++){
+
+            $('.square').eq(i).text(squares[i]);
+            
+            var h = hidden.indexOf(squares[i]);
+            if(h !== -1){
+                delete hidden[h];
+                $('.square').eq(i).hide();
+            } else {
+                $('.square').eq(i).show();
+            }
+
+        }
+
+
     }, 
 
     doHint: function(e){
@@ -388,7 +428,7 @@ App.PuzzleView = Backbone.View.extend({
             
             $('.answertext').html(a);
 
-            if(a.length > 9){
+            if(a.length > 10){
                 App.puzzleView.doReset(e);
             } else {
                 App.puzzleView.doGuess(a);        
@@ -545,17 +585,6 @@ function rot13(str) {
     return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
   });
 }
-
-
-function shuffleItems(sel) {
-    var $el = $(sel);
-    $el.each(function(){
-        var items = $(this).children().clone(true);
-        var ret = (items.length) ? $(this).html(shuffle(items)) : this;
-        $el.replaceWith(ret);
-    });
-}
-
     
 function shuffle(arr) {
     for(var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);

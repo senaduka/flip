@@ -88,7 +88,7 @@
     for(var i = 0; i < clues.length; i++){
         var clue = clues[i]
 %>
-      <li data-answer="<%=clue['word']%>">
+      <li data-answer="<%=clue['word']%>" title="<%=rot13(clue['word'])%>">
       <span class="word"><%=clue['word'].length%> letters</span>: 
       <span class="def"><%=clue['def']%></span>
       </li>
@@ -102,6 +102,7 @@
       <span class="gohome">Home</span>
       <span class="restart">Restart</span>
       <span class="hint">Hint</span>
+      <span class="sort">Sort</span>
       <span class="shuffle">Shuffle</span>
     </div>
 
