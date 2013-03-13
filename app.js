@@ -254,7 +254,7 @@ App.PuzzleView = Backbone.View.extend({
     intervalID: null,
     guessing: false,
     count: 0,
-    total: 7,
+    total: 0,
     puzNum: 0,
     data: null,
 
@@ -306,6 +306,8 @@ App.PuzzleView = Backbone.View.extend({
         this.secs = 0;
 
         this.data = puzzles[puzNum];
+
+        this.total = puzzles[puzNum]['clues'].length;
 
         var tpl = $('.puzzleTemplate').text();
         var html = _.template(tpl, this.data);

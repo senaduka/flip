@@ -56,7 +56,7 @@ for (var i = 0; i < lines.length; i++) {
         }
         words[s].push({
             word: ln[0],
-            def : ln[1].charAt(0).toUpperCase() + ln[1].substr(1) + '.'
+            def : ln[1]
         });
         
     }
