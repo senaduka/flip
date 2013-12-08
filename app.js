@@ -288,7 +288,7 @@ App.PuzzleView = Backbone.View.extend({
             events = {
                 'click .shuffle' : 'doShuffle',
                 'click .sort' : 'doSort',
-                'click .hint' : 'doWin',
+                'click .hint' : 'doHint',
                 'click .square' : 'doSquare',
                 'click .reset': 'doReset',
                 'click .restart': 'doRestart',
