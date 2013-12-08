@@ -336,9 +336,11 @@ App.PuzzleView = Backbone.View.extend({
     },
 
     doPogoci: function(e){
+        window.location = App.rijeci_serivce_url + "guesses";
 
     },
     doPobjede: function(e) {
+        window.location = App.rijeci_serivce_url + "solutions";
 
     },
 
