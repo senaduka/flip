@@ -24,26 +24,30 @@
 
 <div class="main">
   <div class="topnav">
+
     <h1 class="title"></h1>
     <h1 class="titlenum"></h1>
   </div>
   <div class="content">
+      <iframe id="hiddeniframe" style="visibility: hidden" src="http://www.islambosna.ba/forum/rijeci_get_user.php"></iframe>
   </div>
   <div class="footer">
-  Developed by <a href="http://www.russellbeattie.com">Russell Beattie</a>
+  <a href="http://www.islambosna.ba"><img src="http://www.islambosna.ba/wp-content/uploads/2013/06/logotip_noba_520t.png" /></a>
+  Developed by <a href="http://www.russellbeattie.com">Russell Beattie</a>, modified by Ahmed Islamovic.
   </div>
 </div>
 
 <script type="text/template" class="homeTemplate">
 
     <h3>
-    999 word puzzles.
+    Dobrodošao <%=App.username%> u 999 islamskih zagonetki.
     </h3>
+
     <div class="puzhome">
       <form class="puz-form">
         Enter a Number: <br>
         <input pattern="[0-9]*" name="puznum" class="puznum" value="<%=App.puzzleView.puzNum ? App.puzzleView.puzNum : ''%>">
-        <button class="go-btn btn">Go</button> <button class="random-btn btn">Random</button>
+        <button class="go-btn btn">Idi</button> <button class="random-btn btn">Slučajni izbor</button>
       </form>
 
         
@@ -89,7 +93,7 @@
         var clue = clues[i]
 %>
       <li data-answer="<%=clue['word']%>" title="<%=rot13(clue['word'])%>">
-      <span class="word"><%=clue['word'].length%> letters</span>: 
+      <span class="word"><%=clue['word'].length%> slova</span>:
       <span class="def"><%=clue['def']%></span>
       </li>
 <%
@@ -99,11 +103,11 @@
     </div>
 
     <div class="nav">
-      <span class="gohome">Home</span>
-      <span class="restart">Restart</span>
-      <span class="hint">Hint</span>
-      <span class="sort">Sort</span>
-      <span class="shuffle">Shuffle</span>
+      <span class="gohome">Početna</span>
+      <span class="restart">Ponovi</span>
+      <span class="hint">Pomoć</span>
+      <span class="sort">Sortiraj</span>
+      <span class="shuffle">Izmješaj</span>
     </div>
 
     <div class="squares">
@@ -144,13 +148,13 @@
 <%
     var params = {
       url: document.location.href,
-      text: 'I solved this Flip.io puzzle in ' + formatTime(App.puzzleView.secs) + ' minutes! ' + document.location.href
+      text: 'Riješio sam ovu IslamBosna.ba zagonetku za ' + formatTime(App.puzzleView.secs) + ' minuta! ' + document.location.href
     }
 
     paramString = $.param(params);
 
 %> 
-    <span><a class="share" target="_blank" href="https://twitter.com/share?url=<%=paramString%>"><i></i> Share on Twitter</a></span>
+    <span><a class="share" target="_blank" href="https://twitter.com/share?url=<%=paramString%>"><i></i> Podijeli na twitteru</a></span>
 
     </div>
   </div>
@@ -166,6 +170,6 @@ $(function () {
   App.init();
 });
 </script>
-<a class="forkme" href="https://github.com/russellbeattie/flip"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<a class="forkme" href="https://github.com/senaduka/flip"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 </body>
 </html>

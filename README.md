@@ -1,6 +1,6 @@
-# [Flip.io Puzzle Game](http://flip.io)
+# [IslamBosna.ba Rijeci](http://www.islambosna.ba/rijeci/)
 
-An HTML5 puzzle app, and puzzle file generator. MIT licensed. Code is running at http://flip.io
+An HTML5 puzzle app, and puzzle file generator. MIT licensed. Code is running at http://www.islambosna.ba/rijeci/
 
 Here's a quick rundown of the files:
 

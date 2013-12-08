@@ -4,7 +4,17 @@ var App = {};
 
 App.init = function(){
 
-    App.name = 'Flip.io';
+    App.rijeci_serivce_url = "http://localhost:3000/"
+    App.forum_service_url = "http://www.islambosna.ba/forum/"
+
+    // get the username from islambosna forum
+
+    $.get(App.forum_service_url + "rijeci_get_user.php",
+        function (data) {
+            App.username = data;
+        });
+
+    App.name = 'IslamBosna Riječi';
     $('.title').text(App.name);
 
     App.touch = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
@@ -136,6 +146,7 @@ App.Router = Backbone.Router.extend({
             $('.content').html(App.puzzleView.$el);
 
             App.router.currentView = App.puzzleView;
+            App.puzzleNumber = puzNum;
 
             $('.content').fadeIn();
 
@@ -277,7 +288,7 @@ App.PuzzleView = Backbone.View.extend({
             events = {
                 'click .shuffle' : 'doShuffle',
                 'click .sort' : 'doSort',
-                'click .hint' : 'doHint',
+                'click .hint' : 'doWin',
                 'click .square' : 'doSquare',
                 'click .reset': 'doReset',
                 'click .restart': 'doRestart',
@@ -475,6 +486,13 @@ App.PuzzleView = Backbone.View.extend({
                     $(this).css({'text-decoration':'line-through','font-style':'italic'});
                     $(this).fadeIn();
                 });
+
+                var definition = $clue.find('.def').text();
+                var guess = $.param({ username: App.username , definition: definition });
+                alert(guess);
+                $.post(App.rijeci_serivce_url + "guesses.json", guess , function (data) {
+
+                }  );
                 
                 $('.square').each(function(index){
                     $(this).data('guessed',''); 
@@ -505,7 +523,13 @@ App.PuzzleView = Backbone.View.extend({
         App.addWin(App.puzzleView.puzNum);
         
         App.play('sweep');
-        
+
+        var solution = $.param({ username: App.username , number: App.puzzleNumber,  time: $('.timer').text() });
+
+        $.post(App.rijeci_serivce_url + "solutions.json", solution , function (data) {
+            alert(data);
+        }  );
+
         setTimeout(function() {
 
             $('.squares table').fadeOut();

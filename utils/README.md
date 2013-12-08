@@ -27,7 +27,6 @@ to be used by batch.js puzzle generator.
 
 # batch.js instructions
 
-After creating a words.txt dictionary, run:
 
 	$ node batch.js
 
