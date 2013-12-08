@@ -4,15 +4,16 @@ var App = {};
 
 App.init = function(){
 
-    App.rijeci_serivce_url = "http://localhost:3000/"
+    App.rijeci_serivce_url = "http://www.islambosna.ba/rijeci_backend/"
     App.forum_service_url = "http://www.islambosna.ba/forum/"
 
     // get the username from islambosna forum
 
-    $.get(App.forum_service_url + "rijeci_get_user.php",
+   /* $.get(App.forum_service_url + "rijeci_get_user.php",
         function (data) {
             App.username = data;
-        });
+        });*/
+    App.username = $('#hiddeniframe').contents();
 
     App.name = 'IslamBosna Riječi';
     $('.title').text(App.name);
@@ -282,7 +283,9 @@ App.PuzzleView = Backbone.View.extend({
                 'touchend .reset': 'doReset',
                 'touchend .restart': 'doRestart',
                 'touchend .gohome': 'doHome',
-                'touchend .next': 'doNext'
+                'touchend .next': 'doNext',
+                'touchend .pogoci': 'doPogoci',
+                'touchend .pobjede': 'doPobjede'
             }
         } else {
             events = {
@@ -293,7 +296,9 @@ App.PuzzleView = Backbone.View.extend({
                 'click .reset': 'doReset',
                 'click .restart': 'doRestart',
                 'click .gohome': 'doHome',
-                'click .next': 'doNext'
+                'click .next': 'doNext',
+                'click .pogoci': 'doPogoci',
+                'click .pobjede': 'doPobjede'
             }
         }
         return events;
@@ -327,6 +332,13 @@ App.PuzzleView = Backbone.View.extend({
 
         this.startTimer();
 
+
+    },
+
+    doPogoci: function(e){
+
+    },
+    doPobjede: function(e) {
 
     },
 
@@ -489,7 +501,7 @@ App.PuzzleView = Backbone.View.extend({
 
                 var definition = $clue.find('.def').text();
                 var guess = $.param({ username: App.username , definition: definition });
-                alert(guess);
+
                 $.post(App.rijeci_serivce_url + "guesses.json", guess , function (data) {
 
                 }  );

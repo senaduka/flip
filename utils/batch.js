@@ -42,7 +42,7 @@ var squaresWordLengths = [
 
 
 // pull in the word list, divide into lists by word length
-var lines = fs.readFileSync('./words.txt').toString().split('\n');
+var lines = fs.readFileSync('./filtrirano.txt').toString().split('\n');
 
 var words = {};
 
