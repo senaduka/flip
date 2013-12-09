@@ -13,7 +13,11 @@ App.init = function(){
         function (data) {
             App.username = data;
         });*/
-    App.username = $('#hiddeniframe').contents().find("#username").text();
+
+
+    $('#hiddeniframe').load(App.forum_service_url + "rijeci_get_user.php"  , function(){
+         App.username = $('#hiddeniframe').contents().find("#username").text();
+    });
 
     App.name = 'IslamBosna Riječi';
     $('.title').text(App.name);
