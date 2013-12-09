@@ -13,7 +13,7 @@ App.init = function(){
         function (data) {
             App.username = data;
         });*/
-    App.username = $('#hiddeniframe').contents();
+    App.username = $('#hiddeniframe').contents().find("#username").text();
 
     App.name = 'IslamBosna Riječi';
     $('.title').text(App.name);
