@@ -3,7 +3,7 @@
 rijeci = []
 
 File.readlines('rijeci.txt').each do |line|
-	word_regex = /^(?<rijec>\p{Word}{4,10}),(?<definicija>.*)$/
+	word_regex = /^(?<rijec>\p{Word}{4,10})\s(?<definicija>.*)$/
 	matches = word_regex.match(line)
 
 	unless matches.nil?
