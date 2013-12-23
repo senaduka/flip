@@ -545,7 +545,7 @@ App.PuzzleView = Backbone.View.extend({
         var solution = $.param({ username: App.username , number: App.puzzleNumber,  time: $('.timer').text() });
 
         $.post(App.rijeci_serivce_url + "solutions.json", solution , function (data) {
-            alert(data);
+            
         }  );
 
         setTimeout(function() {
